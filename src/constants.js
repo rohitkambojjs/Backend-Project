@@ -1,2 +1,4 @@
 console.log("Jay Shri Ram")
-export const DB_NAME = "videoOcean"
+const DB_NAME = "videoOcean"
+
+export default DB_NAME
