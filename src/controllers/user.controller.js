@@ -16,8 +16,6 @@ const generateAccessAndRefreshToken = async (userId)=>{
 
     return {accessToken, refreshToken}
 
-    //! 25:00
-
   } catch (error) {
     throw new ApiError(500, "Something went wrong while generating referesh and access token")
   }
@@ -97,6 +95,16 @@ const loginUser = asyncHandler( async (req, res)=>{
     throw new ApiError(401, "Password is wrong")
   }
 
+  const {refreshToken, accessToken} = await generateAccessAndRefreshToken(user._id)
+
+  const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
+
+  const options = {
+    httpOnly: true,
+    secure: true,
+  }
+
+  //! 28:00
 })
 
 export { 
